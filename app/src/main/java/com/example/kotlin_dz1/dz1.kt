@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,7 +33,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @Composable
 fun AppContent(
     modifier: Modifier = Modifier,
-    myViewModel: ListofNumebers = viewModel(),
+    myViewModel: ListofNumbers = viewModel(),
 ){
     val data = myViewModel.data
     val configuration = LocalConfiguration.current
@@ -58,6 +59,7 @@ fun AppContent(
                                 .width(100.dp)
                                 .height(100.dp)
                                 .background(color = ItemBoxColor.current)
+                                .clickable { myViewModel.deleteItem(it) }
                             ,
                             contentAlignment = Alignment.Center
                         ){

@@ -11,11 +11,20 @@ import androidx.lifecycle.ViewModel
 
 val ItemBoxColor = compositionLocalOf { Color.Blue }
 val GridWidth = compositionLocalOf {3}
-class ListofNumebers : ViewModel() {
+class ListofNumbers : ViewModel() {
     val data = mutableStateListOf(1)
+    val removed_data = ArrayDeque<Int>()
     fun addItem() {
-        data.add(data.size + 1)
+        if (removed_data.isEmpty()) data.add(data.size + 1) else {
+            data.add(removed_data.last())
+            removed_data.remove(removed_data.last())
+        }
     }
+    fun deleteItem(item: Int){
+        removed_data.add(item)
+        data.remove(item)
+    }
+
 }
 
 class MainActivity : ComponentActivity() {
